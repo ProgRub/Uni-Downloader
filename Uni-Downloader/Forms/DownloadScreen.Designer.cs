@@ -110,13 +110,13 @@ namespace Forms
 			this.TextBoxRenameFilename.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxRenameFilename.Location = new System.Drawing.Point(611, 733);
 			this.TextBoxRenameFilename.Name = "TextBoxRenameFilename";
-			this.TextBoxRenameFilename.ReadOnly = true;
 			this.TextBoxRenameFilename.Size = new System.Drawing.Size(432, 24);
 			this.TextBoxRenameFilename.TabIndex = 18;
 			// 
 			// ComboBoxDirectories
 			// 
 			this.ComboBoxDirectories.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
+			this.ComboBoxDirectories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.ComboBoxDirectories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ComboBoxDirectories.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.ComboBoxDirectories.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
