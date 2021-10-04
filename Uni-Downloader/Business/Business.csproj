@@ -5,10 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Entities\" />
     <Folder Include="Services\" />
     <Folder Include="Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DB">
+      <HintPath>..\..\..\Music-Librarian\Music-Librarian\DB\bin\Debug\net5.0\DB.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
