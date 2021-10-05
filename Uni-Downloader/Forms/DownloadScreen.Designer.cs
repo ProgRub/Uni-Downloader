@@ -100,7 +100,7 @@ namespace Forms
 			this.LabelRenameFilename.Name = "LabelRenameFilename";
 			this.LabelRenameFilename.Size = new System.Drawing.Size(115, 17);
 			this.LabelRenameFilename.TabIndex = 17;
-			this.LabelRenameFilename.Text = "New Filename";
+			this.LabelRenameFilename.Text = "New FilePath";
 			// 
 			// TextBoxRenameFilename
 			// 
