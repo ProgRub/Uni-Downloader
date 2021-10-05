@@ -20,6 +20,7 @@ namespace Forms
             Application.SetCompatibleTextRenderingDefault(false);
             BusinessFacade.Instance.LoadDatabase();
             Application.Run(new Window());
+            BusinessFacade.Instance.StopGettingNewFiles();
             BusinessFacade.Instance.SaveChanges();
         }
     }

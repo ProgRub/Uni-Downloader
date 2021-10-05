@@ -98,7 +98,7 @@ namespace Forms
 			this.LabelRenameFilename.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.LabelRenameFilename.Location = new System.Drawing.Point(490, 735);
 			this.LabelRenameFilename.Name = "LabelRenameFilename";
-			this.LabelRenameFilename.Size = new System.Drawing.Size(115, 17);
+			this.LabelRenameFilename.Size = new System.Drawing.Size(108, 17);
 			this.LabelRenameFilename.TabIndex = 17;
 			this.LabelRenameFilename.Text = "New FilePath";
 			// 
@@ -152,6 +152,7 @@ namespace Forms
 			this.ButtonMoveFile.TabIndex = 21;
 			this.ButtonMoveFile.Text = "Move File";
 			this.ButtonMoveFile.UseVisualStyleBackColor = true;
+			this.ButtonMoveFile.Click += new System.EventHandler(this.ButtonMoveFile_Click);
 			// 
 			// DownloadScreen
 			// 
@@ -168,6 +169,8 @@ namespace Forms
 			this.Controls.Add(this.TextBoxOriginFilename);
 			this.Name = "DownloadScreen";
 			this.Size = new System.Drawing.Size(1612, 841);
+			this.Enter += new System.EventHandler(this.DownloadScreen_Enter);
+			this.Leave += new System.EventHandler(this.DownloadScreen_Leave);
 			this.Controls.SetChildIndex(this.ButtonBack, 0);
 			this.Controls.SetChildIndex(this.TextBoxOriginFilename, 0);
 			this.Controls.SetChildIndex(this.LabelOrigin, 0);
