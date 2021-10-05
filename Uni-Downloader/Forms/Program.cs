@@ -19,7 +19,7 @@ namespace Forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             BusinessFacade.Instance.LoadDatabase();
-            Application.Run(new Window());
+            Application.Run(new UniDownloader());
             BusinessFacade.Instance.StopGettingNewFiles();
             BusinessFacade.Instance.SaveChanges();
         }

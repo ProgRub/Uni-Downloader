@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class Window : Form
+    public partial class UniDownloader : Form
     {
-        public Window()
+        public UniDownloader()
         {
             InitializeComponent();
         }

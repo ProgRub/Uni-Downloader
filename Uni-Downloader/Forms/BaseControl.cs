@@ -15,14 +15,14 @@ namespace Forms
 			AutoSize = true;
 		}
 
-		protected void MaximizeWindow() => ((Window) Parent).WindowState = FormWindowState.Maximized;
+		protected void MaximizeWindow() => ((UniDownloader) Parent).WindowState = FormWindowState.Maximized;
 
-		protected Size GetWindowSize() => ((Window) Parent).Size;
+		protected Size GetWindowSize() => ((UniDownloader) Parent).Size;
 
 		protected void MoveToScreen(BaseControl newControl, BaseControl previousControl)
 		{
 			newControl.PreviousScreen = previousControl;
-			var window = (Window) Parent ?? (Window) newControl.Parent;
+			var window = (UniDownloader) Parent ?? (UniDownloader) newControl.Parent;
 			window.Controls.Remove(this);
 			newControl.Dock = DockStyle.Fill;
 			window.Controls.Add(newControl);
@@ -35,7 +35,7 @@ namespace Forms
 		{
 			if (string.IsNullOrWhiteSpace(textBox.PlaceholderText))
 			{
-				((Window) Parent).ActiveControl = null;
+				((UniDownloader) Parent).ActiveControl = null;
 				ClearTextBox(textBox);
 				textBox.PlaceholderText = errorMessage;
 			}
@@ -48,7 +48,7 @@ namespace Forms
 
 		protected void SetFormAcceptButton(Button button)
 		{
-			((Window) Parent).AcceptButton = button;
+			((UniDownloader) Parent).AcceptButton = button;
 		}
 
 

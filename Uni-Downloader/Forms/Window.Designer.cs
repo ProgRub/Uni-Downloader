@@ -1,7 +1,7 @@
 ﻿
 namespace Forms
 {
-    partial class Window
+    partial class UniDownloader
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,6 +29,7 @@ namespace Forms
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UniDownloader));
 			this.homeScreen1 = new Forms.HomeScreen();
 			this.SuspendLayout();
 			// 
@@ -45,7 +46,7 @@ namespace Forms
 			this.homeScreen1.Size = new System.Drawing.Size(926, 188);
 			this.homeScreen1.TabIndex = 0;
 			// 
-			// Window
+			// UniDownloader
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -54,7 +55,8 @@ namespace Forms
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(41)))));
 			this.ClientSize = new System.Drawing.Size(926, 188);
 			this.Controls.Add(this.homeScreen1);
-			this.Name = "Window";
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Name = "UniDownloader";
 			this.Text = "Window";
 			this.ResumeLayout(false);
 			this.PerformLayout();
