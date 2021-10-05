@@ -60,23 +60,9 @@ namespace Forms
 				ComboBoxDirectories.Invoke(
 					new MethodInvoker(delegate
 					{
-						ComboBoxDirectories.Items.Clear();
+						ComboBoxDirectories.Items.Insert(ComboBoxDirectories.Items.IndexOf("Skip File"),args.Directory);
 					}));
-				foreach (var subDirectory in BusinessFacade.Instance.GetUniSubDirectories())
-				{
-					ComboBoxDirectories.Invoke(
-						new MethodInvoker(delegate
-						{
-							ComboBoxDirectories.Items.Add(subDirectory.Replace(baseUniversityDirectory, "").Substring(1));
-						}));
-				}
 				
-				ComboBoxDirectories.Invoke(
-					new MethodInvoker(delegate
-					{
-						ComboBoxDirectories.Items.Add("Skip File");
-						ComboBoxDirectories.Items.Add("Delete File");
-					}));
 			};
 			BusinessFacade.Instance.StartGettingNewFiles();
 		}
