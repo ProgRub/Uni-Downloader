@@ -57,7 +57,7 @@ namespace Forms
 			this.Controls.Add(this.homeScreen1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "UniDownloader";
-			this.Text = "Window";
+			this.Text = "UniDownloader";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

@@ -16,5 +16,10 @@ namespace Forms
 		{
 			InitializeComponent();
 		}
+
+		private void OptionsScreen_Enter(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

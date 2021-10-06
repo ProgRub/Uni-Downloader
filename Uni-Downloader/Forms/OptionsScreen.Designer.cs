@@ -158,6 +158,7 @@ namespace Forms
 			this.Controls.Add(this.ListBoxFileFormats);
 			this.Name = "OptionsScreen";
 			this.Size = new System.Drawing.Size(978, 447);
+			this.Enter += new System.EventHandler(this.OptionsScreen_Enter);
 			this.Controls.SetChildIndex(this.ButtonBack, 0);
 			this.Controls.SetChildIndex(this.ListBoxFileFormats, 0);
 			this.Controls.SetChildIndex(this.LabelFileFormat, 0);

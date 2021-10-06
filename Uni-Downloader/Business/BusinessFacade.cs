@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Business.CustomEventArgs;
+using Business.DTOs;
 using Business.Services;
 using Microsoft.VisualBasic.FileIO;
 
@@ -65,6 +66,11 @@ namespace Business
 			FileSystem.DeleteFile(filePath, UIOption.OnlyErrorDialogs,
 				RecycleOption.SendToRecycleBin);
 			DownloadUniFilesService.SemaphoreFileBeingChecked.Release();
+		}
+
+		public IEnumerable<FileFormatDTO> GetAllFileFormats()
+		{
+			return FileFormatService.Instance.GetFileFormats();
 		}
 	}
 }
