@@ -27,7 +27,7 @@ namespace Business.Services
 		internal IEnumerable<string> GetChildrenDirectoriesOfBaseUniDirectory() =>
 			Directory.GetDirectories(UniToBaseDirectory);
 
-		public void SaveChanges()
+		internal void SaveChanges()
 		{
 			var directories = _directoriesRepository.GetById(1);
 			directories.UniToBaseDirectory = UniToBaseDirectory;

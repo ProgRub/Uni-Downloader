@@ -57,6 +57,8 @@ namespace Forms
 			this.ListBoxFileFormats.Name = "ListBoxFileFormats";
 			this.ListBoxFileFormats.Size = new System.Drawing.Size(409, 210);
 			this.ListBoxFileFormats.TabIndex = 6;
+			this.ListBoxFileFormats.SelectedIndexChanged += new System.EventHandler(this.ListBoxFileFormats_SelectedIndexChanged);
+			this.ListBoxFileFormats.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxFileFormats_KeyDown);
 			// 
 			// LabelFileFormat
 			// 
@@ -113,6 +115,7 @@ namespace Forms
 			this.ButtonUndo.Size = new System.Drawing.Size(39, 32);
 			this.ButtonUndo.TabIndex = 16;
 			this.ButtonUndo.UseVisualStyleBackColor = true;
+			this.ButtonUndo.Click += new System.EventHandler(this.ButtonUndo_Click);
 			// 
 			// ButtonRedo
 			// 
@@ -127,6 +130,7 @@ namespace Forms
 			this.ButtonRedo.Size = new System.Drawing.Size(39, 32);
 			this.ButtonRedo.TabIndex = 17;
 			this.ButtonRedo.UseVisualStyleBackColor = true;
+			this.ButtonRedo.Click += new System.EventHandler(this.ButtonRedo_Click);
 			// 
 			// ButtonAddChangeFileFormat
 			// 
@@ -143,6 +147,7 @@ namespace Forms
 			this.ButtonAddChangeFileFormat.TabIndex = 18;
 			this.ButtonAddChangeFileFormat.Text = "Add/Change File Format";
 			this.ButtonAddChangeFileFormat.UseVisualStyleBackColor = true;
+			this.ButtonAddChangeFileFormat.Click += new System.EventHandler(this.ButtonAddChangeFileFormat_Click);
 			// 
 			// OptionsScreen
 			// 
