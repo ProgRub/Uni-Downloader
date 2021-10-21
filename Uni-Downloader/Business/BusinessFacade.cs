@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Business.CustomEventArgs;
 using Business.DTOs;
+using Business.Enums;
 using Business.Services;
 using Microsoft.VisualBasic.FileIO;
 
@@ -59,6 +60,7 @@ namespace Business
 		public void SkipFile(string filename)
 		{
 			DownloadUniFilesService.SemaphoreFileBeingChecked.Release();
+			NotifyFileMoved?.Invoke(this,new FileMovedArgs{Condition = FileMovedCondition.Skipped,FilePath = filename});
 		}
 
 		public void DeleteFile(string filePath)

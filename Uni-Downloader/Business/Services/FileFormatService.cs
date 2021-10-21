@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Business.DTOs;
 using DB;
@@ -19,9 +20,41 @@ namespace Business.Services
 
 		public static FileFormatService Instance { get; } = new();
 
-		internal ISet<FileFormatDTO> NewFileFormats = new HashSet<FileFormatDTO>();
+		private ISet<FileFormatDTO> _newFileFormats = new HashSet<FileFormatDTO>();
 
-		internal ISet<FileFormatDTO> DeletedFileFormats = new HashSet<FileFormatDTO>();
+		private ISet<FileFormatDTO> _deletedFileFormats = new HashSet<FileFormatDTO>();
+
+		internal void MarkFileFormatsToDelete(ISet<FileFormatDTO> fileFormats)
+		{
+			foreach (var song in fileFormats)
+			{
+				_deletedFileFormats.Add(song);
+			}
+		}
+
+		internal void UnMarkFileFormatsToDelete(ISet<FileFormatDTO> fileFormats)
+		{
+			foreach (var song in fileFormats)
+			{
+				_deletedFileFormats.Remove(song);
+			}
+		}
+
+		internal void MarkFileFormatsToAdd(ISet<FileFormatDTO> fileFormats)
+		{
+			foreach (var song in fileFormats)
+			{
+				_newFileFormats.Add(song);
+			}
+		}
+
+		internal void UnMarkFileFormatsToAdd(ISet<FileFormatDTO> fileFormats)
+		{
+			foreach (var song in fileFormats)
+			{
+				_newFileFormats.Remove(song);
+			}
+		}
 
 		internal IEnumerable<FileFormatDTO> GetFileFormats()
 		{
@@ -30,13 +63,13 @@ namespace Business.Services
 
 		internal void SaveChanges()
 		{
-			foreach (var fileFormat in NewFileFormats)
+			foreach (var fileFormat in _newFileFormats)
 			{
 				_fileFormatRepository.Add(new UniFileFormat
 					{Extension = fileFormat.FileExtension, Description = fileFormat.Description});
 			}
 
-			foreach (var deletedFileFormat in DeletedFileFormats)
+			foreach (var deletedFileFormat in _deletedFileFormats)
 			{
 				_fileFormatRepository.Remove(_fileFormatRepository.GetAll()
 					.First(e => e.Extension == deletedFileFormat.FileExtension));
@@ -44,5 +77,7 @@ namespace Business.Services
 
 			_fileFormatRepository.SaveChanges();
 		}
+
+		public UniFileFormat GetFileFormatById(int id) => _fileFormatRepository.GetById(id);
 	}
 }

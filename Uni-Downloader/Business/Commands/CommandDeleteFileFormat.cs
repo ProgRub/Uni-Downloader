@@ -1,20 +1,22 @@
-﻿namespace Business.Commands
+﻿using System.Collections.Generic;
+using Business.DTOs;
+using Business.Services;
+
+namespace Business.Commands
 {
 	public class CommandDeleteFileFormat:ICommand
 	{
-		public void Execute()
+		private readonly ISet<FileFormatDTO> _fileFormats;
+		public CommandDeleteFileFormat(ISet<FileFormatDTO> fileFormats)
 		{
-			throw new System.NotImplementedException();
+			_fileFormats = fileFormats;
 		}
 
-		public void Undo()
-		{
-			throw new System.NotImplementedException();
-		}
+		public void Execute() => FileFormatService.Instance.MarkFileFormatsToDelete(_fileFormats);
 
-		public void Redo()
-		{
-			throw new System.NotImplementedException();
-		}
+		public void Undo() => FileFormatService.Instance.UnMarkFileFormatsToDelete(_fileFormats);
+
+		public void Redo() => Execute();
+		
 	}
 }

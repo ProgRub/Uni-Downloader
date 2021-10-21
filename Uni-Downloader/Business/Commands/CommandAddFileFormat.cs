@@ -1,20 +1,21 @@
-﻿namespace Business.Commands
+﻿using System.Collections.Generic;
+using Business.DTOs;
+using Business.Services;
+
+namespace Business.Commands
 {
 	public class CommandAddFileFormat:ICommand
 	{
-		public void Execute()
+		private readonly ISet<FileFormatDTO> _fileFormats;
+		public CommandAddFileFormat(ISet<FileFormatDTO> fileFormats)
 		{
-			throw new System.NotImplementedException();
+			_fileFormats = fileFormats;
 		}
 
-		public void Undo()
-		{
-			throw new System.NotImplementedException();
-		}
+		public void Execute() => FileFormatService.Instance.MarkFileFormatsToAdd(_fileFormats);
 
-		public void Redo()
-		{
-			throw new System.NotImplementedException();
-		}
+		public void Undo() => FileFormatService.Instance.UnMarkFileFormatsToAdd(_fileFormats);
+
+		public void Redo() => Execute();
 	}
 }
