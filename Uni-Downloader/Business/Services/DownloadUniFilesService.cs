@@ -45,12 +45,15 @@ namespace Business.Services
 			foreach (var filePath in files.Where(filePath =>
 				!CheckedFiles.Contains(filePath)))
 			{
-				if(!FileFormatService.Instance.GetFileFormats().Select(e=>e.FileExtension).Contains(Path.GetFileName(filePath).Substring(Path.GetFileName(filePath).LastIndexOf('.')))) continue;
+				if (!FileFormatService.Instance.GetFileFormats().Select(e => e.FileExtension)
+					.Contains(Path.GetFileName(filePath).Substring(Path.GetFileName(filePath).LastIndexOf('.'))))
+					continue;
 				CheckedFiles.Add(filePath);
 				NotifyNewDownloadedFile?.Invoke(this,
 					new NewFileEventArgs {Filename = Path.GetFileName(filePath).Replace(' ', '_').Replace("_-_", "-")});
 				return;
 			}
+
 			SemaphoreFileBeingChecked.Release();
 		}
 
