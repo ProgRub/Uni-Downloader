@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DB;
 using DB.Repositories.Implementations;
 using DB.Repositories.Interfaces;
@@ -24,10 +25,15 @@ namespace Business.Services
 		internal string UniToBaseDirectory { get; set; }
 		public static DirectoriesService Instance { get; } = new(new DirectoriesRepository(Database.GetContext()));
 
-		internal IEnumerable<string> GetChildrenDirectoriesOfBaseUniDirectory() =>
-			Directory.GetDirectories(UniToBaseDirectory);
+		internal IEnumerable<string> GetChildrenDirectoriesOfBaseUniDirectory()
+		{
+			var uniBaseDirectoryPathSeparatorCount = UniToBaseDirectory.Count(x=>x==Path.DirectorySeparatorChar);
+			var allDirectories=Directory.GetDirectories(UniToBaseDirectory,"*",SearchOption.AllDirectories);
+			return allDirectories.Where(dir =>
+				dir.Count(x => x == Path.DirectorySeparatorChar) - uniBaseDirectoryPathSeparatorCount <= 3);
+		}
 
-		public void SaveChanges()
+		internal void SaveChanges()
 		{
 			var directories = _directoriesRepository.GetById(1);
 			directories.UniToBaseDirectory = UniToBaseDirectory;

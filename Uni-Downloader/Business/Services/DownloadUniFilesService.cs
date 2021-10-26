@@ -45,19 +45,24 @@ namespace Business.Services
 			foreach (var filePath in files.Where(filePath =>
 				!CheckedFiles.Contains(filePath)))
 			{
+				if (!FileFormatService.Instance.GetFileFormats().Select(e => e.FileExtension)
+					.Contains(Path.GetFileName(filePath).Substring(Path.GetFileName(filePath).LastIndexOf('.'))))
+					continue;
 				CheckedFiles.Add(filePath);
 				NotifyNewDownloadedFile?.Invoke(this,
-					new NewFileEventArgs {Filename = Path.GetFileName(filePath)});
+					new NewFileEventArgs {Filename = Path.GetFileName(filePath).Replace(' ', '_').Replace("_-_", "-")});
 				return;
 			}
+
+			SemaphoreFileBeingChecked.Release();
 		}
 
 		internal void MoveFile(string selectedDirectory, string newFilePath)
 		{
-			var destinationDirectory = Path.Join(DirectoriesService.Instance.UniToBaseDirectory,selectedDirectory);
-			if (newFilePath.Contains(Path.DirectorySeparatorChar ))
+			var destinationDirectory = Path.Join(DirectoriesService.Instance.UniToBaseDirectory, selectedDirectory);
+			if (newFilePath.Contains(Path.DirectorySeparatorChar))
 				destinationDirectory = CreateDirectories(selectedDirectory, newFilePath);
-			var newFilename = newFilePath.Split(Path.DirectorySeparatorChar ).Last();
+			var newFilename = newFilePath.Split(Path.DirectorySeparatorChar).Last();
 			var destinationFilePath = Path.Join(destinationDirectory, newFilename);
 			var condition = FileMovedCondition.NoProblem;
 			if (File.Exists(destinationFilePath))
@@ -75,15 +80,19 @@ namespace Business.Services
 
 		private string CreateDirectories(string selectedDirectory, string newFilePath)
 		{
-			var filePathSplit = newFilePath.Split(Path.DirectorySeparatorChar ).ToList();
+			var filePathSplit = newFilePath.Split(Path.DirectorySeparatorChar).ToList();
 			filePathSplit.Remove(filePathSplit.Last());
 			var baseUniversityDirectory = DirectoriesService.Instance.UniToBaseDirectory;
-			var currentDirectory = Path.Join(baseUniversityDirectory,selectedDirectory);
+			var currentDirectory = Path.Join(baseUniversityDirectory, selectedDirectory);
 			foreach (var newDirectory in filePathSplit)
 			{
 				var directoryToCreate = Path.Join(currentDirectory, newDirectory);
 				Directory.CreateDirectory(directoryToCreate);
-				NotifyNewDirectory?.Invoke(this,new DirectoryCreatedArgs(){Directory = directoryToCreate.Replace(baseUniversityDirectory, "").Substring(1)});
+				if (directoryToCreate.Count(x => x == Path.DirectorySeparatorChar) -
+					baseUniversityDirectory.Count(x => x == Path.DirectorySeparatorChar) <= 3)
+					NotifyNewDirectory?.Invoke(this,
+						new DirectoryCreatedArgs()
+							{Directory = directoryToCreate.Replace(baseUniversityDirectory, "").Substring(1)});
 				currentDirectory = directoryToCreate;
 			}
 

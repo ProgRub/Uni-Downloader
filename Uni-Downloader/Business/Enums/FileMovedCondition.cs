@@ -3,6 +3,6 @@
 	public enum FileMovedCondition
 	{
 		NoProblem,
-		Replaced
+		Replaced,Skipped
 	}
 }

@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Business.CustomEventArgs;
+using Business.DTOs;
+using Business.Enums;
 using Business.Services;
 using Microsoft.VisualBasic.FileIO;
 
@@ -39,7 +41,8 @@ namespace Business
 
 		public void SaveChanges()
 		{
-			DirectoriesService.Instance.SaveChanges();
+			DirectoriesService.Instance.SaveChanges(); 
+			FileFormatService.Instance.SaveChanges();
 		}
 
 		public void LoadDatabase() => DirectoriesService.Instance.SaveChanges();
@@ -58,6 +61,7 @@ namespace Business
 		public void SkipFile(string filename)
 		{
 			DownloadUniFilesService.SemaphoreFileBeingChecked.Release();
+			NotifyFileMoved?.Invoke(this,new FileMovedArgs{Condition = FileMovedCondition.Skipped,FilePath = filename});
 		}
 
 		public void DeleteFile(string filePath)
@@ -65,6 +69,11 @@ namespace Business
 			FileSystem.DeleteFile(filePath, UIOption.OnlyErrorDialogs,
 				RecycleOption.SendToRecycleBin);
 			DownloadUniFilesService.SemaphoreFileBeingChecked.Release();
+		}
+
+		public IEnumerable<FileFormatDTO> GetAllFileFormats()
+		{
+			return FileFormatService.Instance.GetFileFormats();
 		}
 	}
 }

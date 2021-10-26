@@ -25,6 +25,7 @@ namespace Forms
 		private void DownloadScreen_Enter(object sender, EventArgs e)
 		{
 			var baseUniversityDirectory = BusinessFacade.Instance.GetBaseUniversityDirectory();
+			ComboBoxDirectories.Items.Add("");
 			foreach (var subDirectory in BusinessFacade.Instance.GetUniSubDirectories())
 			{
 				ComboBoxDirectories.Items.Add(subDirectory.Replace(baseUniversityDirectory, "").Substring(1));
@@ -49,10 +50,16 @@ namespace Forms
 				TextBoxDestinationFilename.Invoke(
 					new MethodInvoker(delegate
 					{
-						TextBoxDestinationFilename.AppendText(args.FilePath .Replace(baseUniversityDirectory, "").Substring(1)+
-						                                      (args.Condition == FileMovedCondition.Replaced
-							                                      ? " REPLACED"
-							                                      : "") + Environment.NewLine);
+						TextBoxDestinationFilename.AppendText(
+							(args.Condition switch
+							{
+								FileMovedCondition.Replaced => args.FilePath.Replace(baseUniversityDirectory, "")
+									.Substring(1) + " REPLACED",
+								FileMovedCondition.Skipped => Path.GetFileName(args.FilePath) + " SKIPPED",
+								FileMovedCondition.NoProblem => args.FilePath.Replace(baseUniversityDirectory, "")
+									.Substring(1),
+								_ => ""
+							}) + Environment.NewLine);
 					}));
 			};
 			BusinessFacade.Instance.NotifyNewDirectory += (_, args) =>
@@ -60,10 +67,11 @@ namespace Forms
 				ComboBoxDirectories.Invoke(
 					new MethodInvoker(delegate
 					{
-						ComboBoxDirectories.Items.Insert(ComboBoxDirectories.Items.IndexOf("Skip File"),args.Directory);
+						ComboBoxDirectories.Items.Insert(ComboBoxDirectories.Items.IndexOf("Skip File"),
+							args.Directory);
 					}));
-				
 			};
+			SetFormAcceptButton(ButtonMoveFile);
 			BusinessFacade.Instance.StartGettingNewFiles();
 		}
 
