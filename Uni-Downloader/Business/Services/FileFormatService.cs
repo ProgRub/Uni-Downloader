@@ -58,7 +58,7 @@ namespace Business.Services
 
 		internal IEnumerable<FileFormatDTO> GetFileFormats()
 		{
-			return _fileFormatRepository.GetAll().Select(FileFormatDTO.ConvertFileFormatToDTO).ToHashSet();
+			return _fileFormatRepository.GetAll().Select(FileFormatDTO.ConvertFileFormatToDTO).ToHashSet().Concat(_newFileFormats);
 		}
 
 		internal void SaveChanges()

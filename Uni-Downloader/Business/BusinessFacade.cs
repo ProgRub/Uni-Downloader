@@ -41,7 +41,8 @@ namespace Business
 
 		public void SaveChanges()
 		{
-			DirectoriesService.Instance.SaveChanges();
+			DirectoriesService.Instance.SaveChanges(); 
+			FileFormatService.Instance.SaveChanges();
 		}
 
 		public void LoadDatabase() => DirectoriesService.Instance.SaveChanges();
