@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using DB;
@@ -28,9 +29,28 @@ namespace Business.Services
 		internal IEnumerable<string> GetChildrenDirectoriesOfBaseUniDirectory()
 		{
 			var uniBaseDirectoryPathSeparatorCount = UniToBaseDirectory.Count(x=>x==Path.DirectorySeparatorChar);
-			var allDirectories=Directory.GetDirectories(UniToBaseDirectory,"*",SearchOption.AllDirectories);
-			return allDirectories.Where(dir =>
-				dir.Count(x => x == Path.DirectorySeparatorChar) - uniBaseDirectoryPathSeparatorCount <= 3);
+			var allDirectories = new List<string>();
+			var maxDirectoryDepth = 3;
+			foreach (var baseDirectory in Directory.GetDirectories(UniToBaseDirectory))
+			{
+				var directoryDepth = 1;
+				allDirectories.Add(baseDirectory);
+				GetChildrenDirectories(directoryDepth++, maxDirectoryDepth,ref allDirectories);
+			}
+
+			return allDirectories;
+		}
+
+		internal IEnumerable<string> GetChildrenDirectories(int currentDepth, int maxDepth,ref List<string> directories)
+		{
+			if (currentDepth >= maxDepth) return directories;
+			foreach (var directory in Directory.GetDirectories(directories.Last()))
+			{
+				directories.Add(directory);
+				GetChildrenDirectories(++currentDepth, maxDepth, ref directories);
+			}
+
+			return directories;
 		}
 
 		internal void SaveChanges()
