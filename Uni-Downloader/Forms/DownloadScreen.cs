@@ -56,6 +56,7 @@ namespace Forms
 								FileMovedCondition.Replaced => args.FilePath.Replace(baseUniversityDirectory, "")
 									.Substring(1) + " REPLACED",
 								FileMovedCondition.Skipped => Path.GetFileName(args.FilePath) + " SKIPPED",
+								FileMovedCondition.Deleted => Path.GetFileName(args.FilePath) + " DELETED",
 								FileMovedCondition.NoProblem => args.FilePath.Replace(baseUniversityDirectory, "")
 									.Substring(1),
 								_ => ""

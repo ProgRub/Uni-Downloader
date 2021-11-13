@@ -68,6 +68,7 @@ namespace Business
 		{
 			FileSystem.DeleteFile(filePath, UIOption.OnlyErrorDialogs,
 				RecycleOption.SendToRecycleBin);
+			NotifyFileMoved?.Invoke(this,new FileMovedArgs{Condition = FileMovedCondition.Deleted,FilePath = Path.GetFileName(filePath)});
 			DownloadUniFilesService.SemaphoreFileBeingChecked.Release();
 		}
 
