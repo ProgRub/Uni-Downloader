@@ -50,7 +50,7 @@ namespace Business.Services
 					continue;
 				CheckedFiles.Add(filePath);
 				NotifyNewDownloadedFile?.Invoke(this,
-					new NewFileEventArgs {Filename = Path.GetFileName(filePath).Replace(' ', '_').Replace("_-_", "-")});
+					new NewFileEventArgs {Filename = Path.GetFileName(filePath)});
 				return;
 			}
 

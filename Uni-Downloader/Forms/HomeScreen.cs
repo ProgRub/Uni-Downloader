@@ -59,6 +59,7 @@ namespace Forms
 			_downloadsDirectory = BusinessFacade.Instance.GetDownloadsDirectory();
 			TextBoxBaseUniDirectory.Text = _baseUniDirectory;
 			TextBoxDownloadsDirectory.Text = _downloadsDirectory;
+			((UniDownloader)Parent).MinimumSize = MinimumSize;
 		}
 	}
 }

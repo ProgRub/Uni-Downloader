@@ -43,7 +43,7 @@ namespace Forms
 					}));
 				_currentFile = Path.Join(BusinessFacade.Instance.GetDownloadsDirectory(), args.Filename);
 				TextBoxRenameFilename.Invoke(
-					new MethodInvoker(delegate { TextBoxRenameFilename.Text = args.Filename; }));
+					new MethodInvoker(delegate { TextBoxRenameFilename.Text = args.Filename.Replace(' ', '_').Replace("_-_", "-"); }));
 			};
 			BusinessFacade.Instance.NotifyFileMoved += (_, args) =>
 			{

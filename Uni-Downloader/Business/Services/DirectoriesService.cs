@@ -35,7 +35,7 @@ namespace Business.Services
 			{
 				var directoryDepth = 1;
 				allDirectories.Add(baseDirectory);
-				GetChildrenDirectories(directoryDepth++, maxDirectoryDepth,ref allDirectories);
+				GetChildrenDirectories(directoryDepth, maxDirectoryDepth,ref allDirectories);
 			}
 
 			return allDirectories;
@@ -47,7 +47,7 @@ namespace Business.Services
 			foreach (var directory in Directory.GetDirectories(directories.Last()))
 			{
 				directories.Add(directory);
-				GetChildrenDirectories(++currentDepth, maxDepth, ref directories);
+				GetChildrenDirectories(currentDepth+1, maxDepth, ref directories);
 			}
 
 			return directories;

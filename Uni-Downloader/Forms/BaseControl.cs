@@ -12,7 +12,6 @@ namespace Forms
 		public BaseControl()
 		{
 			InitializeComponent();
-			AutoSize = true;
 		}
 
 		protected void MaximizeWindow() => ((UniDownloader) Parent).WindowState = FormWindowState.Maximized;
