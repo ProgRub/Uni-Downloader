@@ -24,6 +24,7 @@ namespace Forms
 
 		private void DownloadScreen_Enter(object sender, EventArgs e)
 		{
+			((UniDownloader)Parent).MinimumSize = MinimumSize;
 			var baseUniversityDirectory = BusinessFacade.Instance.GetBaseUniversityDirectory();
 			ComboBoxDirectories.Items.Add("");
 			foreach (var subDirectory in BusinessFacade.Instance.GetUniSubDirectories())
